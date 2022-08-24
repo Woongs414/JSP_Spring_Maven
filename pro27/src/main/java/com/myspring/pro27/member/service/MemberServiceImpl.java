@@ -36,9 +36,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO login(MemberVO member) {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberVO login(MemberVO memberVO) throws DataAccessException {
+		return memberDAO.loginById(memberVO);
 	}
 
 

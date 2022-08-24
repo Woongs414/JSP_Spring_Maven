@@ -34,7 +34,8 @@ public class MemberControllerImpl implements MemberController {
 	@Override
 	@RequestMapping(value="/member/listMembers.do" , method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception{
-	String viewName = getViewName(request);
+	//String viewName = getViewName(request);
+	String viewName = (String)request.getAttribute("viewName");
 	logger.info("viewname" + viewName);
 	logger.debug("viewName: " + viewName);
 	List membersList = memberService.listMembers();
@@ -89,7 +90,7 @@ public class MemberControllerImpl implements MemberController {
 		session.setAttribute("isLogOn", true);
 		mav.setViewName("redirect:/member/listMembers.do");
 	}else {
-		rAttr.addAttribute("result", "loginFaiiled");
+		rAttr.addAttribute("result", "loginFailed");
 		mav.setViewName("redirect:/member/loginForm.do");
 	}
 	return mav;
@@ -110,6 +111,7 @@ public class MemberControllerImpl implements MemberController {
 	private ModelAndView form(@RequestParam(value="result", required=false)String result,
 			HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
+		//String viewName = getViewName(request);
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);

@@ -12,7 +12,7 @@ import com.myspring.pro27.member.vo.MemberVO;
 
 @Repository("memberDAO")
 public class MemberDAOImpl implements MemberDAO{
-	@Autowired //?•„?˜?˜ setêµ¬ë¬¸?„ ?• ?„ˆ?…Œ?´?…˜?œ¼ë¡? ???‹ ?• ?ˆ˜?ˆ?‹¤.
+	@Autowired //?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ setêµ¬ë¬¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ???ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.
 	private SqlSession sqlSession;
 	/* public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession; 
@@ -36,6 +36,12 @@ public class MemberDAOImpl implements MemberDAO{
 	public int deleteMember(String id) throws DataAccessException{
 		int result = sqlSession.delete("mapper.member.deleteMember",id);
 		return result;
+	}
+
+	@Override
+	public MemberVO loginById(MemberVO memberVO) throws DataAccessException {
+		MemberVO vo = sqlSession.selectOne("mapper.member.loginById", memberVO);
+		return vo;
 	}
 	
 
